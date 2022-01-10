@@ -14,7 +14,11 @@ public class Ball : MonoBehaviour
 	public void Awake()
 	{
 		rigidbody = GetComponent<Rigidbody2D>();
+		ResetMovement();
+	}
 
+	public void ResetMovement()
+	{
 		rigidbody.velocity = startDirection * startSpeed;
 	}
 

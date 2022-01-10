@@ -6,7 +6,7 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
 	[SerializeField] private Vector3 ballSpawnPoint = Vector3.zero;
-	[SerializeField] private GameObject ballPrefab = null;
+	[SerializeField] private Ball ballReference = null;
 	[SerializeField] private int requiredScoreToWin = 5;
 
 	public static ScoreManager Instance = null;
@@ -18,8 +18,6 @@ public class ScoreManager : MonoBehaviour
 	public event Action<int> Player1ScoreChanged = null;
 
 	public event Action<int> GameFinished = null;
-
-	private GameObject ballReference = null;
 
 	private void Awake()
 	{
@@ -55,11 +53,8 @@ public class ScoreManager : MonoBehaviour
 
 	private void ResetGame()
 	{
-		if (ballReference != null)
-			Destroy(ballReference);
-
-		ballReference = Instantiate(ballPrefab);
 		ballReference.transform.position = ballSpawnPoint;
+		ballReference.ResetMovement();
 	}
 
 	private void FinishGame()
